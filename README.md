@@ -51,6 +51,11 @@ cmake --build build-win -j$(nproc)          # -> build-win/tfphobos.dll
 
 ## Installing
 
+DUDE builds that support mod auto-download can fetch this library for you: select the Phobos mod
+and DUDE offers to download it from this release and verifies it against a known checksum before
+use. You still supply the Phobos game data yourself. To install the library manually instead (or
+on a DUDE without that feature):
+
 DUDE loads `<fs_basepath>/tfphobos/tfphobos.{so,dll}`. Put the library next to the Phobos game
 data, which you supply yourself:
 
