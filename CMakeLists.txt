@@ -233,7 +233,20 @@ if(D3_COMPILER_IS_GCC_OR_CLANG)
 		add_compile_options(-fvisibility=hidden)
 	endif()
 
-	add_compile_options(-Werror=format)
+	if(MINGW)
+		# mingw defaults to the MS C runtime's printf; define ANSI stdio so the
+		# C99 conversions used by idlib/game code (%z, %ll) work correctly at
+		# runtime via __mingw_vsnprintf. Required for the win64 cross-build.
+		add_definitions(-D__USE_MINGW_ANSI_STDIO=1)
+		# gcc keeps the "printf" format-attribute archetype as ms_printf on mingw
+		# regardless of the define above, so it flags the ~48 %zd/%zu format
+		# strings the engine uses. Those are correct for ANSI stdio, so keep the
+		# warning but don't make it fatal here; the native Linux/macOS build
+		# still enforces -Werror=format and gatekeeps real format bugs.
+		add_compile_options(-Wformat -Wno-error=format)
+	else()
+		add_compile_options(-Werror=format)
+	endif()
 
 	# TODO fix these warnings
 	add_compile_options(-Wno-sign-compare)
