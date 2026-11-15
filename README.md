@@ -51,22 +51,34 @@ cmake --build build-win -j$(nproc)          # -> build-win/tfphobos.dll
 
 ## Installing
 
-DUDE builds that support mod auto-download can fetch this library for you: select the Phobos mod
-and DUDE offers to download it from this release and verifies it against a known checksum before
-use. You still supply the Phobos game data yourself. To install the library manually instead (or
-on a DUDE without that feature):
+You need your own Doom 3, Resurrection of Evil and Doom 3: Phobos; no game data is included.
+Phobos is the work of Team Future, and it runs on top of Resurrection of Evil.
 
-DUDE loads `<fs_basepath>/tfphobos/tfphobos.{so,dll}`. Put the library next to the Phobos game
-data, which you supply yourself:
+1. Take `tfphobos.dll` (Windows) or `tfphobos.so` (Linux) out of the release archive for your
+   system. The bare `tfphobos-win64.dll` / `tfphobos-linux-x86_64.so` release assets are the same
+   files; rename them to `tfphobos.dll` / `tfphobos.so` if you use those.
+2. Put the library in the Phobos folder, next to its pak files. DUDE loads
+   `<fs_basepath>/tfphobos/tfphobos.{so,dll}`, so the game folder looks like this:
 
-```
-<game>/
-  base/        Doom 3 pak files (from your Doom 3 install)
-  tfphobos/    Phobos pak files + z_pak000_dhewm3.pk4, autoexec.cfg
-    tfphobos.so  /  tfphobos.dll     <- this library
-```
+   ```
+   <game>/
+     base/        Doom 3
+     d3xp/        Resurrection of Evil
+     tfphobos/    Phobos pak files + z_pak000_dhewm3.pk4, autoexec.cfg
+       tfphobos.so  /  tfphobos.dll     <- this library
+   ```
 
-Then run DUDE with `+set fs_basepath <game> +set fs_game tfphobos`.
+   The GOG release of Doom 3: Phobos already comes laid out this way. If your Phobos install is
+   separate, copy its `tfphobos` folder next to your Doom 3 `base/` and `d3xp/`.
+3. Start DUDE with that folder as its game data (the folder it finds `base/` in), open **Mods** in
+   the main menu and pick Phobos. DUDE loads Resurrection of Evil underneath it by itself.
+
+DUDE versions after 0.9.9 can do steps 1 and 2 for you: pick Phobos in the Mods menu and DUDE
+offers to download the library from this repository's release, checks it against a known checksum
+and installs it.
+
+To start it from the command line instead: `dude +set fs_basepath <game> +set fs_game tfphobos`
+(`dude.exe` on Windows). Leave out `fs_basepath` when DUDE already runs from `<game>`.
 
 ## Releases
 
