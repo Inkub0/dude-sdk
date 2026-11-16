@@ -67,8 +67,7 @@ missing; it verifies the download against a known checksum before use.
 ## Releases
 
 Built libraries are published as releases of the DUDE Mod SDK tagged `cdoom-vX.Y.Z`:
-`cdoom-win64.dll` and `cdoom-linux-x86_64.so`, plus an archive per platform with the library,
-`COPYING.txt` and this README. No game data. The release line follows the game interface (dhewm3
+`cdoom-win64.dll` and `cdoom-linux-x86_64.so`. No game data. The release line follows the game interface (dhewm3
 API 9), not DUDE's version.
 
 ## Provenance
