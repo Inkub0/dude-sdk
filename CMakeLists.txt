@@ -175,6 +175,10 @@ endif() # NOT MSVC
 
 # compiler specific flags
 if(D3_COMPILER_IS_GCC_OR_CLANG)
+	if(MINGW)
+		add_definitions(-D__USE_MINGW_ANSI_STDIO=1)
+		add_compile_options(-Wformat -Wno-error=format)
+	endif()
 	add_compile_options(-pipe)
 	add_compile_options(-Wall)
 
