@@ -1,3 +1,28 @@
+# DUDE Mod SDK: Doom3[CC] (closed captions) (`doom3cc` branch)
+
+This branch of the [DUDE Mod SDK](https://github.com/Inkub0/dude-sdk) is the dhewm3 port of
+**Doom3[CC] (closed captions)** from [dhewm3-sdk](https://github.com/dhewm/dhewm3-sdk/tree/doom3cc) (GPLv3; the mod by
+the DOOM3[CC] team), plus the build changes for DUDE's 64-bit Windows library. The game code is unchanged
+from dhewm3's port.
+
+Libraries:
+- `doom3cc` (`doom3cc.dll` / `doom3cc.so`, built from `game/`)
+- `doom3ccXP` (`doom3ccXP.dll` / `doom3ccXP.so`, built from `d3xp/`): the Resurrection of Evil version, needs `d3xp/` data too
+
+No game data is included. You need Doom3[CC] game data (see dhewm/dhewm3-sdk issue 12), plus your own Doom 3 (and Resurrection of Evil for the RoE version).
+
+**In DUDE:** pick the mod in the **Mods** menu; DUDE offers to download the library from this
+branch's release (`doom3cc-vX.Y.Z`) and checks it against a pinned SHA-256. By hand: put the library in
+the mod's folder next to its pak files (`<game>/doom3cc/doom3cc.dll` or `.so`).
+
+**Building:** `cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DBASE=ON -DD3XP=ON` (add
+`-DCMAKE_TOOLCHAIN_FILE=MinGW-x86_64.cmake` and use `build-win` for the 64-bit Windows DLL). The
+Linux release libraries are built in DUDE's Ubuntu 22.04 sandbox so they load on glibc 2.35 and newer.
+
+---
+
+*Below: this branch's README from dhewm3-sdk.*
+
 # Doom3[CC] port for dhewm3
 
 ## License
