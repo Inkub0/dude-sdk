@@ -1,44 +1,70 @@
-# dhewm3 Mod SDK
+# DUDE Mod SDK
 
-This repository contains an SDK that can be used to create modifications ("mods")
-for (or port Doom3 mods to) [dhewm3](https://dhewm3.org).
+The mod SDK for [DUDE](https://github.com/Inkub0/dude), a Doom 3 engine based on
+[dhewm3](https://dhewm3.org). It mirrors the [dhewm3 Mod SDK](https://github.com/dhewm/dhewm3-sdk):
+the `master` branch is the plain game code to start a mod from, and each ported mod lives in its
+own branch. The source is the GPLv3 Doom 3 game code from dhewm3, **licensed under GPLv3, not the
+original Doom 3 SDK license** (see `COPYING.txt`).
 
-It contains (mostly) the same source files as the original Doom3 SDK, but these
-are taken from dhewm3 and **are licensed under GPLv3, not the SDK license**.  
-Another small difference is that this is built using [CMake](https://cmake.org/)
-instead of SCons + VS Project files.  
-This means that you need CMake to build it, but don't worry, on Windows it can
-create a Visual Studio Solution for you so you can program and compile with
-Visual Studio like you might be used to.
+DUDE keeps dhewm3's game interface (`GAME_API_VERSION` 9, layouts unchanged), so a library built
+from this SDK also loads in dhewm3 1.5.x, and dhewm3's own mod libraries load in DUDE. What this
+repository adds on top of dhewm3-sdk is the 64-bit Windows build: DUDE is 64-bit only, while
+dhewm3 ships its Windows mod DLLs as 32-bit, which `dude.exe` cannot load.
 
-## Some ports of existing Mods
+- `MinGW-x86_64.cmake`: toolchain to cross-compile the 64-bit Windows DLL from Linux.
+- `CMakeLists.txt`: a MinGW branch (`__USE_MINGW_ANSI_STDIO`, `-Werror=format` demoted to a
+  warning there because mingw-gcc checks printf formats against the MS runtime); native builds
+  keep `-Werror=format`.
 
-This repository also contains ports of existing mods whichs authors released
-the source under GPL; you can find these in their own branches:
-[Blood Mod](https://github.com/dhewm/dhewm3-sdk/tree/bloodmod),
-[Classic Doom 3](https://github.com/dhewm/dhewm3-sdk/tree/cdoom),
-[Denton's Enhanced Doom3](https://github.com/dhewm/dhewm3-sdk/tree/dentonmod),
-[Desolated - The Crying Fate](https://github.com/dhewm/dhewm3-sdk/tree/desolated),
-[ELDOOM](https://github.com/dhewm/dhewm3-sdk/tree/eldoom),
-[Fitz Packerton](https://github.com/dhewm/dhewm3-sdk/tree/fitz),
-[Grimm: Quest for the Gatherer's Key](https://github.com/dhewm/dhewm3-sdk/tree/grimm)
-[Hard Corps](https://github.com/dhewm/dhewm3-sdk/tree/hardcorps),
-[HeXen: Edge Of Chaos](https://github.com/dhewm/dhewm3-sdk/tree/eoc),
-[Perfected Doom 3](https://github.com/dhewm/dhewm3-sdk/tree/perfected),
-[Real Gibs](https://github.com/dhewm/dhewm3-sdk/tree/realgibs),
-[Scarlet **Rivensin**: The Ruiner](https://github.com/dhewm/dhewm3-sdk/tree/rivensin),
-[Doom3: The Lost Mission](https://github.com/dhewm/dhewm3-sdk/tree/d3le) and
-[Sikkmod](https://github.com/dhewm/dhewm3-sdk/tree/sikkmod)
+## Mods
 
-~~*In addition to this repository, there is also the LibreCoop mod that implements Coop
-gameplay for dhewm3: [LibreCoop Github for the source code](https://github.com/Stradex/librecoop)*~~  
-Currently **LibreCoop** is unmaintained upstream so there's a [LibreCoop branch in this repo](https://github.com/dhewm/dhewm3-sdk/tree/librecoop)
-that adds the latest changes from the dhewm3-sdk. 
-<!-- and [LibreCoop on ModDB which has the game data](https://www.moddb.com/mods/librecoop-dhewm3-coop). -->
+| Branch | Mod | Needs | Release |
+|---|---|---|---|
+| [`tfphobos`](https://github.com/Inkub0/dude-sdk/tree/tfphobos) | Doom 3: Phobos (Team Future; port by TwelveEyes) | Doom 3 + Resurrection of Evil + Phobos data | `tfphobos-v1.0.0` |
+| [`cdoom`](https://github.com/Inkub0/dude-sdk/tree/cdoom) | Classic Doom 3 (Flaming Sheep Software; port by dhewm3) | Doom 3 + Classic Doom 3 data | `cdoom-v1.0.0` |
 
-You can find Win32 DLLs and Linux x86_64 (amd64) `.so` libraries of those mods that work with
-dhewm3 1.5.x at [the dhewm3 Github release page](https://github.com/dhewm/dhewm3/releases/latest)
-(the dhewm3-mods-1.5.* archives).
+The Lost Mission (`d3le`) is built into DUDE itself. The other mods dhewm3 has ported live in the
+[dhewm3-sdk branches](https://github.com/dhewm/dhewm3-sdk); their Linux x86_64 libraries from
+dhewm3's releases load in DUDE as they are, and a branch here is only needed for a 64-bit Windows
+build or DUDE-specific changes.
+
+No game data is included in any branch or release: you need your own copy of each mod's data.
+
+### Installing a mod library
+
+DUDE downloads a missing library for a mod it knows (the ones above) when you pick the mod in the
+**Mods** menu: it asks first, then checks the file against a pinned SHA-256. To install one by
+hand, put `<mod>.dll` / `<mod>.so` in the mod's folder next to its pak files
+(`<game>/<mod>/<mod>.dll`) and pick the mod in the Mods menu, or start DUDE with
+`+set fs_game <mod>`.
+
+### Releases
+
+Each mod is released on its own version line, tagged `<branch>-v<X.Y.Z>`, with the libraries
+named `<mod>-win64.dll` and `<mod>-linux-x86_64.so` (DUDE renames them to `<mod>.dll` / `<mod>.so`
+when it installs them), plus an archive per platform with the library, `COPYING.txt` and the
+branch's README. A release is tied to the game interface version, not to a DUDE version.
+
+## Building for DUDE
+
+Same as below, plus the 64-bit Windows cross-build from Linux (needs mingw-w64):
+
+```
+git checkout tfphobos        # or another mod branch; stay on master for a new mod
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release                                  # Linux .so
+cmake --build build -j$(nproc)
+cmake -S . -B build-win -DCMAKE_TOOLCHAIN_FILE=MinGW-x86_64.cmake -DCMAKE_BUILD_TYPE=Release
+cmake --build build-win -j$(nproc)                                             # 64-bit .dll
+```
+
+A mod built on the base game uses `-DBASE=ON -DD3XP=OFF`, one built on Resurrection of Evil
+`-DD3XP=ON -DBASE=OFF` (each branch's README says which). With Visual Studio, pick the **x64**
+platform, not Win32.
+
+---
+
+*The rest of this README is dhewm3-sdk's own and applies unchanged; where it says dhewm3, DUDE works
+the same way.*
 
 ## How to build
 
