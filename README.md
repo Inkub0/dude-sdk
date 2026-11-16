@@ -18,15 +18,32 @@ dhewm3 ships its Windows mod DLLs as 32-bit, which `dude.exe` cannot load.
 
 ## Mods
 
-| Branch | Mod | Needs | Release |
-|---|---|---|---|
-| [`tfphobos`](https://github.com/Inkub0/dude-sdk/tree/tfphobos) | Doom 3: Phobos (Team Future; port by TwelveEyes) | Doom 3 + Resurrection of Evil + Phobos data | `tfphobos-v1.0.0` |
-| [`cdoom`](https://github.com/Inkub0/dude-sdk/tree/cdoom) | Classic Doom 3 (Flaming Sheep Software; port by dhewm3) | Doom 3 + Classic Doom 3 data | `cdoom-v1.0.0` |
+Every mod dhewm3 has ported (its [dhewm3-sdk](https://github.com/dhewm/dhewm3-sdk) branches), plus
+Doom 3: Phobos. Each branch builds the 64-bit Windows DLL and the Linux x86_64 library; a branch
+with two libraries also has the mod's Resurrection of Evil version. The Releases link lists that
+mod's releases, newest first (GitHub's single "Latest" badge means nothing in this repository).
 
-The Lost Mission (`d3le`) is built into DUDE itself. The other mods dhewm3 has ported live in the
-[dhewm3-sdk branches](https://github.com/dhewm/dhewm3-sdk); their Linux x86_64 libraries from
-dhewm3's releases load in DUDE as they are, and a branch here is only needed for a 64-bit Windows
-build or DUDE-specific changes.
+| Mod | Branch | Libraries (`fs_game`) | Releases |
+|---|---|---|---|
+| Blood Mod (ALord7) | [`bloodmod`](https://github.com/Inkub0/dude-sdk/tree/bloodmod) | `bloodmod` / `bloodmod_roe` | [bloodmod-v…](https://github.com/Inkub0/dude-sdk/releases?q=bloodmod) |
+| Classic Doom 3 (Flaming Sheep Software) | [`cdoom`](https://github.com/Inkub0/dude-sdk/tree/cdoom) | `cdoom` | [cdoom-v…](https://github.com/Inkub0/dude-sdk/releases?q=cdoom) |
+| Denton's Enhanced Doom 3 (Clone JC Denton) | [`dentonmod`](https://github.com/Inkub0/dude-sdk/tree/dentonmod) | `dentonmod` | [dentonmod-v…](https://github.com/Inkub0/dude-sdk/releases?q=dentonmod) |
+| Desolated - The Crying Fate (DaveTheFreak and team) | [`desolated`](https://github.com/Inkub0/dude-sdk/tree/desolated) | `desolated` | [desolated-v…](https://github.com/Inkub0/dude-sdk/releases?q=desolated) |
+| Doom 3: Phobos (Team Future; port by TwelveEyes) | [`tfphobos`](https://github.com/Inkub0/dude-sdk/tree/tfphobos) | `tfphobos` | [tfphobos-v…](https://github.com/Inkub0/dude-sdk/releases?q=tfphobos) |
+| Doom3[CC] (closed captions) (the DOOM3[CC] team) | [`doom3cc`](https://github.com/Inkub0/dude-sdk/tree/doom3cc) | `doom3cc` / `doom3ccXP` | [doom3cc-v…](https://github.com/Inkub0/dude-sdk/releases?q=doom3cc) |
+| ELDOOM (Ez0n3) | [`eldoom`](https://github.com/Inkub0/dude-sdk/tree/eldoom) | `eldoom` | [eldoom-v…](https://github.com/Inkub0/dude-sdk/releases?q=eldoom) |
+| Fitz Packerton (Teddy Dief) | [`fitz`](https://github.com/Inkub0/dude-sdk/tree/fitz) | `fitz` | [fitz-v…](https://github.com/Inkub0/dude-sdk/releases?q=fitz) |
+| Grimm: Quest for the Gatherer's Key (grimmquest) | [`grimm`](https://github.com/Inkub0/dude-sdk/tree/grimm) | `grimm` | [grimm-v…](https://github.com/Inkub0/dude-sdk/releases?q=grimm) |
+| Hard Corps (Revility and Ivan_the_B) | [`hardcorps`](https://github.com/Inkub0/dude-sdk/tree/hardcorps) | `hardcorps` | [hardcorps-v…](https://github.com/Inkub0/dude-sdk/releases?q=hardcorps) |
+| HeXen: Edge of Chaos (Zeroth; dhewm3 port by LegendGuard) | [`eoc`](https://github.com/Inkub0/dude-sdk/tree/eoc) | `eoc` | [eoc-v…](https://github.com/Inkub0/dude-sdk/releases?q=eoc) |
+| LibreCoop (Stradex) | [`librecoop`](https://github.com/Inkub0/dude-sdk/tree/librecoop) | `librecoop` / `librecoopd3xp` | [librecoop-v…](https://github.com/Inkub0/dude-sdk/releases?q=librecoop) |
+| Perfected Doom 3 (VGames) | [`perfected`](https://github.com/Inkub0/dude-sdk/tree/perfected) | `perfected` / `perfected_roe` | [perfected-v…](https://github.com/Inkub0/dude-sdk/releases?q=perfected) |
+| Real Gibs (darknar; dhewm3 port by ALord7) | [`realgibs`](https://github.com/Inkub0/dude-sdk/tree/realgibs) | `realgibs` | [realgibs-v…](https://github.com/Inkub0/dude-sdk/releases?q=realgibs) |
+| Scarlet Rivensin: The Ruiner (Revility and the Rivensin team) | [`rivensin`](https://github.com/Inkub0/dude-sdk/tree/rivensin) | `rivensin` | [rivensin-v…](https://github.com/Inkub0/dude-sdk/releases?q=rivensin) |
+| Sikkmod (Sikkpin) | [`sikkmod`](https://github.com/Inkub0/dude-sdk/tree/sikkmod) | `sikkmod` / `sikkmodd3xp` | [sikkmod-v…](https://github.com/Inkub0/dude-sdk/releases?q=sikkmod) |
+
+The Lost Mission (`d3le`) is built into DUDE itself. The Linux release libraries are built in
+DUDE's Ubuntu 22.04 sandbox, so they need only glibc 2.27 or newer.
 
 No game data is included in any branch or release: you need your own copy of each mod's data.
 
@@ -42,8 +59,8 @@ hand, put `<mod>.dll` / `<mod>.so` in the mod's folder next to its pak files
 
 Each mod is released on its own version line, tagged `<branch>-v<X.Y.Z>`, with the libraries
 named `<mod>-win64.dll` and `<mod>-linux-x86_64.so` (DUDE renames them to `<mod>.dll` / `<mod>.so`
-when it installs them), plus an archive per platform with the library, `COPYING.txt` and the
-branch's README. A release is tied to the game interface version, not to a DUDE version.
+when it installs them), plus an archive per platform with the libraries, `COPYING.txt`, the
+branch's README and `BUILDINFO.txt`. A release is tied to the game interface version, not to a DUDE version.
 
 ## Building for DUDE
 
