@@ -59,8 +59,8 @@ hand, put `<mod>.dll` / `<mod>.so` in the mod's folder next to its pak files
 
 Each mod is released on its own version line, tagged `<branch>-v<X.Y.Z>`, with the libraries
 named `<mod>-win64.dll` and `<mod>-linux-x86_64.so` (DUDE renames them to `<mod>.dll` / `<mod>.so`
-when it installs them), plus an archive per platform with the libraries, `COPYING.txt`, the
-branch's README and `BUILDINFO.txt`. A release is tied to the game interface version, not to a DUDE version.
+when it installs them). Nothing else: the licence and the source are the branch itself. A release
+is tied to the game interface version, not to a DUDE version.
 
 ## Building for DUDE
 
