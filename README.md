@@ -54,9 +54,8 @@ cmake --build build-win -j$(nproc)          # -> build-win/tfphobos.dll
 You need your own Doom 3, Resurrection of Evil and Doom 3: Phobos; no game data is included.
 Phobos is the work of Team Future, and it runs on top of Resurrection of Evil.
 
-1. Take `tfphobos.dll` (Windows) or `tfphobos.so` (Linux) out of the release archive for your
-   system. The bare `tfphobos-win64.dll` / `tfphobos-linux-x86_64.so` release assets are the same
-   files; rename them to `tfphobos.dll` / `tfphobos.so` if you use those.
+1. Download `tfphobos-win64.dll` (Windows) or `tfphobos-linux-x86_64.so` (Linux) from the
+   release and rename it to `tfphobos.dll` / `tfphobos.so`.
 2. Put the library in the Phobos folder, next to its pak files. DUDE loads
    `<fs_basepath>/tfphobos/tfphobos.{so,dll}`, so the game folder looks like this:
 
@@ -83,8 +82,8 @@ To start it from the command line instead: `dude +set fs_basepath <game> +set fs
 ## Releases
 
 Built libraries are published as releases of the [DUDE Mod SDK](https://github.com/Inkub0/dude-sdk)
-tagged `tfphobos-vX.Y.Z`, never inside DUDE's: `tfphobos-win64.dll` and `tfphobos-linux-x86_64.so`,
-plus an archive per platform with the library, `COPYING.txt` and this README. No game data.
+tagged `tfphobos-vX.Y.Z`, never inside DUDE's: `tfphobos-win64.dll` and `tfphobos-linux-x86_64.so`.
+No game data.
 
 ## Versions
 
