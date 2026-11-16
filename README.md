@@ -1,3 +1,27 @@
+# DUDE Mod SDK: Grimm: Quest for the Gatherer's Key (`grimm` branch)
+
+This branch of the [DUDE Mod SDK](https://github.com/Inkub0/dude-sdk) is the dhewm3 port of
+**Grimm: Quest for the Gatherer's Key** from [dhewm3-sdk](https://github.com/dhewm/dhewm3-sdk/tree/grimm) (GPLv3; the mod by
+grimmquest), plus the build changes for DUDE's 64-bit Windows library. The game code is unchanged
+from dhewm3's port.
+
+Libraries:
+- `grimm` (`grimm.dll` / `grimm.so`, built from `game/`)
+
+No game data is included. You need Grimm game data (ModDB), plus your own Doom 3.
+
+**In DUDE:** pick the mod in the **Mods** menu; DUDE offers to download the library from this
+branch's release (`grimm-vX.Y.Z`) and checks it against a pinned SHA-256. By hand: put the library in
+the mod's folder next to its pak files (`<game>/grimm/grimm.dll` or `.so`).
+
+**Building:** `cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DBASE=ON -DD3XP=OFF` (add
+`-DCMAKE_TOOLCHAIN_FILE=MinGW-x86_64.cmake` and use `build-win` for the 64-bit Windows DLL). The
+Linux release libraries are built in DUDE's Ubuntu 22.04 sandbox so they load on glibc 2.35 and newer.
+
+---
+
+*Below: this branch's README from dhewm3-sdk.*
+
 # dhewm3 Mod SDK
 
 This repository contains an SDK that can be used to create modifications ("mods")
