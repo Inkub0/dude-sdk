@@ -1,3 +1,27 @@
+# DUDE Mod SDK: HeXen: Edge of Chaos (`eoc` branch)
+
+This branch of the [DUDE Mod SDK](https://github.com/Inkub0/dude-sdk) is the dhewm3 port of
+**HeXen: Edge of Chaos** from [dhewm3-sdk](https://github.com/dhewm/dhewm3-sdk/tree/eoc) (GPLv3; the mod by
+Zeroth; dhewm3 port by LegendGuard), plus the build changes for DUDE's 64-bit Windows library. The game code is unchanged
+from dhewm3's port.
+
+Libraries:
+- `eoc` (`eoc.dll` / `eoc.so`, built from `game/`)
+
+No game data is included. You need HeXen: Edge of Chaos game data, dhewm3 edition (ModDB), plus your own Doom 3.
+
+**In DUDE:** pick the mod in the **Mods** menu; DUDE offers to download the library from this
+branch's release (`eoc-vX.Y.Z`) and checks it against a pinned SHA-256. By hand: put the library in
+the mod's folder next to its pak files (`<game>/eoc/eoc.dll` or `.so`).
+
+**Building:** `cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DBASE=ON -DD3XP=OFF` (add
+`-DCMAKE_TOOLCHAIN_FILE=MinGW-x86_64.cmake` and use `build-win` for the 64-bit Windows DLL). The
+Linux release libraries are built in DUDE's Ubuntu 22.04 sandbox so they load on glibc 2.35 and newer.
+
+---
+
+*Below: this branch's README from dhewm3-sdk.*
+
 # HeXen: Edge Of Chaos
 
 This is the source of HeXen: Edge Of Chaos (HEOC) game by HEOC Team.
