@@ -1,4 +1,4 @@
-# dude-phobos
+# DUDE Mod SDK: Doom 3: Phobos (`tfphobos` branch)
 
 The Doom 3: Phobos game library (`tfphobos.so` / `tfphobos.dll`) for [DUDE](https://github.com/Inkub0/dude),
 built from the `tfphobos` branch of [TwelveEyes/dhewm3-sdk](https://github.com/TwelveEyes/dhewm3-sdk) -
@@ -24,7 +24,7 @@ Future. This is an independent community project, not affiliated with or endorse
 - The source tree is the dhewm3 Mod SDK `tfphobos` branch as TwelveEyes shipped it (initial commit,
   unmodified): `game/` and `d3xp/` (the Phobos game code, built as the `tfphobos` library), `idlib/`,
   and the engine-interface headers (`framework/`, `renderer/`, `sound/`, `cm/`, `ui/`, `sys/`).
-- `MinGW-x86_64.cmake` and the win64 handling in `CMakeLists.txt` are this repository's additions,
+- `MinGW-x86_64.cmake` and the win64 handling in `CMakeLists.txt` are the DUDE Mod SDK's additions,
   so the library can be cross-compiled 64-bit for Windows (upstream ships only a 32-bit DLL).
 - Later commits adapt the build to DUDE: one change per commit, each saying what it changes and why.
 
@@ -74,7 +74,7 @@ Phobos is the work of Team Future, and it runs on top of Resurrection of Evil.
    the main menu and pick Phobos. DUDE loads Resurrection of Evil underneath it by itself.
 
 DUDE versions after 0.9.9 can do steps 1 and 2 for you: pick Phobos in the Mods menu and DUDE
-offers to download the library from this repository's release, checks it against a known checksum
+offers to download the library from this branch's release, checks it against a known checksum
 and installs it.
 
 To start it from the command line instead: `dude +set fs_basepath <game> +set fs_game tfphobos`
@@ -82,21 +82,21 @@ To start it from the command line instead: `dude +set fs_basepath <game> +set fs
 
 ## Releases
 
-Built libraries are published as their own archives, `dude-phobos-<version>-<platform>`, never
-inside DUDE's: `tfphobos.so` / `tfphobos.dll`, this repository's `COPYING.txt`, and a README. No
-game data.
+Built libraries are published as releases of the [DUDE Mod SDK](https://github.com/Inkub0/dude-sdk)
+tagged `tfphobos-vX.Y.Z`, never inside DUDE's: `tfphobos-win64.dll` and `tfphobos-linux-x86_64.so`,
+plus an archive per platform with the library, `COPYING.txt` and this README. No game data.
 
 ## Versions
 
-dude-phobos has its own release line and is not tied to any particular DUDE version. The only
+This branch has its own release line and is not tied to any particular DUDE version. The only
 compatibility requirement is the dhewm3 game API: this library targets **API version 9**, a frozen
 ABI, so it loads into any engine that exposes it (DUDE 0.9.x and later). Releases are tagged
-`vX.Y.Z` on their own schedule; `main` tracks the latest work.
+`tfphobos-vX.Y.Z` on their own schedule; the branch tracks the latest work.
 
 ## Provenance
 
 The source is the `tfphobos` branch of github.com/TwelveEyes/dhewm3-sdk (a fork of
 github.com/dhewm/dhewm3-sdk), a community compatibility patch that reimplements Doom 3: Phobos on
 the dhewm3 game API, licensed GPLv3. The original Doom 3: Phobos is the work of Team Future; its
-game assets are not part of this repository. The patch's own notes record what it does and does
+game assets are not part of this branch. The patch's own notes record what it does and does
 not reproduce (the biohelmet, a 1:1 clickable item GUI, camera blur and bloom are not implemented).
